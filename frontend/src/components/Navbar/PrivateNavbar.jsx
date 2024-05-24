@@ -10,12 +10,24 @@ import { Link } from "react-router-dom";
 import { IoLogOutOutline } from "react-icons/io5";
 
 import { SiAuthy } from "react-icons/si";
+import { useDispatch } from "react-redux";
+import { logoutAction } from "../../redux/slice/authSlice";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function PrivateNavbar() {
+  //dispatch
+  const dispatch = useDispatch();
+
+  //logout handler
+  const logoutHandler = () => {
+    dispatch(logoutAction());
+    //rremove the user from localstorage
+    localStorage.removeItem("userInfo");
+  };
+
   return (
     <Disclosure as="nav" className="bg-white ">
       {({ open }) => (
@@ -83,7 +95,7 @@ export default function PrivateNavbar() {
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <button
-                    // onClick={logoutHandler}
+                    onClick={logoutHandler}
                     type="button"
                     className="relative m-2 inline-flex items-center gap-x-1.5 rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
                   >
@@ -126,7 +138,7 @@ export default function PrivateNavbar() {
                         <Menu.Item>
                           {({ active }) => (
                             <button
-                              // onClick={logoutHandler}
+                              onClick={logoutHandler}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
@@ -200,7 +212,7 @@ export default function PrivateNavbar() {
               <div className="mt-3 space-y-1">
                 <DisclosureButton
                   as="button"
-                  // onClick={logoutHandler}
+                  onClick={logoutHandler}
                   className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
                 >
                   Sign out
