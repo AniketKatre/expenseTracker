@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";
 import { FaEnvelope, FaLock } from "react-icons/fa";
@@ -18,6 +19,8 @@ const validationSchema = Yup.object({
 
 //////////////////////   MAIN --------------
 const Login = () => {
+  //Navigate
+  const navigate = useNavigate();
   //dispatch
   const dispatch = useDispatch();
 
@@ -54,6 +57,15 @@ const Login = () => {
     },
   });
   // console.log(formik);
+
+  //// REDIRECT to pofile page after login
+  useEffect(() => {
+    setTimeout(() => {
+      if (isSuccess) {
+        navigate("/profile");
+      }
+    }, 3000);
+  }, [isPending, isError, error, isSuccess]);
 
   return (
     <form

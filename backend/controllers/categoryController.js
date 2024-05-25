@@ -55,7 +55,7 @@ const categoryController = {
 
     //check if type is valid
     const validTypes = ["income", "expense"];
-    if (!validTypes.includes(type.toLowerCase())) {
+    if (!validTypes.includes(type?.toLowerCase())) {
       throw new Error("Invalid category type " + type);
     }
 
