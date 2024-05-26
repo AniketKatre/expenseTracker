@@ -96,7 +96,9 @@ const userController = {
     //save to DB
     user.password = hashedPassword;
 
-    await user.save();
+    await user.save({
+      validateBeforeSave: false,
+    });
 
     res.status(201).json({ message: "Password Changed Sucessfully..." });
   }),

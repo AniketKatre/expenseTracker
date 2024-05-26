@@ -6,3 +6,12 @@ create by me: Aniket Katre (annie_jb)
 
 TanStack React Query:
 https://tanstack.com/query/latest/docs/framework/react/guides/queries
+
+Chart js : Simple yet flexible JavaScript charting library for the modern web
+https://www.chartjs.org/
+
+Donut chart: https://react-chartjs-2.js.org/examples/doughnut-chart
+
+documentation: https://www.chartjs.org/docs/latest/getting-started/installation.html
+&&
+https://react-chartjs-2.js.org/

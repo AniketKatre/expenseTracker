@@ -2,8 +2,24 @@ import React from "react";
 import { FaUserCircle, FaEnvelope, FaLock } from "react-icons/fa";
 import { useFormik } from "formik";
 import UpdatePassword from "./UpdatePassword";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { updateProfileAPI } from "../../services/users/userServices";
+import AlertMessage from "../Alert/AlertMessage";
 
 const UserProfile = () => {
+  //dispatch
+  const dispatch = useDispatch();
+  //navgate
+  const navigate = useNavigate();
+
+  // mutation - post method for create user login
+  const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
+    mutationFn: updateProfileAPI,
+    mutationKey: ["update-profile"],
+  });
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -12,19 +28,31 @@ const UserProfile = () => {
 
     //Submit
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
+      mutateAsync(values)
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((e) => console.log(e));
     },
   });
   return (
     <>
       <div className="max-w-4xl mx-auto my-10 p-8 bg-white rounded-lg shadow-md">
         <h1 className="mb-2 text-2xl text-center font-extrabold">
-          Welcome Masynctech
+          Welcome
           <span className="text-gray-500 text-sm ml-2">info@gmail.com</span>
         </h1>
         <h3 className="text-xl font-semibold text-gray-800 mb-4">
           Update Profile
         </h3>
+        {isPending && <AlertMessage type="loading" message="Updating..." />}
+        {isError && (
+          <AlertMessage type="error" message={error.response.data.message} />
+        )}
+        {isSuccess && (
+          <AlertMessage type="success" message="Updated Successfully!" />
+        )}
 
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           {/* User Name Field */}

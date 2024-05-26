@@ -10,6 +10,7 @@ import AlertMessage from "../Alert/AlertMessage";
 import { useDispatch } from "react-redux";
 
 const CategoriesList = () => {
+  //fetching list
   const { data, isError, isLoading, isFetched, error, refetch } = useQuery({
     queryFn: listCategoriesAPI,
     queryKey: ["list-categories"],

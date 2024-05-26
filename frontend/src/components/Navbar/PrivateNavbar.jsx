@@ -6,7 +6,7 @@ import {
   DisclosureButton,
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoLogOutOutline } from "react-icons/io5";
 
 import { SiAuthy } from "react-icons/si";
@@ -21,11 +21,15 @@ export default function PrivateNavbar() {
   //dispatch
   const dispatch = useDispatch();
 
+  //navigate
+  const navigate = useNavigate();
+
   //logout handler
   const logoutHandler = () => {
     dispatch(logoutAction());
     //rremove the user from localstorage
     localStorage.removeItem("userInfo");
+    navigate("/login");
   };
 
   return (
