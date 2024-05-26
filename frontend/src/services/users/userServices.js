@@ -65,3 +65,14 @@ export const updateProfileAPI = async ({ email, username }) => {
   //return promises
   return response.data;
 };
+
+// Get Users
+export const getUserAPI = async () => {
+  const response = await axios.get(`${BASE_URL}/users/profile`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response;
+};

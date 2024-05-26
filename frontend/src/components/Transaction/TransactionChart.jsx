@@ -6,7 +6,7 @@ import {
   Legend,
   plugins,
 } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import { Doughnut, Line } from "react-chartjs-2";
 import { useQuery } from "@tanstack/react-query";
 import { listTransactionsAPI } from "../../services/transactions/transactionServices";
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -90,8 +90,9 @@ const TransactionChart = () => {
       <h1 className="text-2xl font-bold text-center mb-6">
         Transaction Overview
       </h1>
-      <div style={{ height: "350px" }}>
+      <div className="flex flex-row" style={{ height: "350px" }}>
         <Doughnut data={data} options={options} />
+        {/* <Line data={data} options={options} /> */}
       </div>
     </div>
   );

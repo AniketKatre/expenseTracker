@@ -11,11 +11,12 @@ import {
 import { IoIosStats } from "react-icons/io";
 import { FaFilter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 const HomePage = () => {
   return (
     <>
-      <div className="bg-gradient-to-r from-red-500 to-yellow-300 text-white py-20 px-4">
+      <div className="bg-gradient-to-r from-blue-500 to-red-300 text-white py-20 px-4">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           {/* Heading */}
           <h1 className="text-5xl font-bold text-center">
@@ -114,21 +115,7 @@ const HomePage = () => {
       </div>
 
       {/* CTA */}
-      <div className="bg-blue-500 text-white py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold">
-            Ready to Take Control of Your Finances?
-          </h2>
-          <p className="mt-4">
-            Join us now and start managing your expenses like a pro!
-          </p>
-          <Link to="/register">
-            <button className="mt-8 px-6 py-3 bg-white text-blue-500 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
-              Sign Up For Free
-            </button>
-          </Link>
-        </div>
-      </div>
+      <Footer />
     </>
   );
 };

@@ -67,7 +67,7 @@ const TransactionForm = () => {
       mutateAsync(values)
         .then((data) => {
           // console.log(data);
-          // navigate("/transactionlist");
+          navigate("/dashboard");
         })
         .catch((e) => console.log(e));
     },

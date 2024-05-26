@@ -14,6 +14,7 @@ import UpdateCategory from "./components/Category/UpdateCategory";
 import TransactionForm from "./components/Transaction/TransactionForm";
 import Dashboard from "./components/User/Dashboard";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
+import Footer from "./components/Home/Footer";
 
 export default function App() {
   //get the token
@@ -30,6 +31,7 @@ export default function App() {
 
         <Routes>
           <Route path="/" element={<HomePage />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           {/* <Route path="/add-category" element={<AddCategory />} />
@@ -65,7 +67,7 @@ export default function App() {
             path="/add-transaction"
             element={
               <AuthRoute>
-                <UpdateCategory />
+                <TransactionForm />
               </AuthRoute>
             }
           />

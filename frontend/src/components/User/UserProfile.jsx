@@ -4,8 +4,11 @@ import { useFormik } from "formik";
 import UpdatePassword from "./UpdatePassword";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import { updateProfileAPI } from "../../services/users/userServices";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  getUserAPI,
+  updateProfileAPI,
+} from "../../services/users/userServices";
 import AlertMessage from "../Alert/AlertMessage";
 
 const UserProfile = () => {
@@ -14,11 +17,24 @@ const UserProfile = () => {
   //navgate
   const navigate = useNavigate();
 
-  // mutation - post method for create user login
-  const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
-    mutationFn: updateProfileAPI,
-    mutationKey: ["update-profile"],
+  //GET USER query
+  const {
+    data: getUser,
+    isLoading,
+    error: getserErr,
+    refetch: userFetch,
+  } = useQuery({
+    queryFn: getUserAPI,
+    queryKey: ["get-user"],
   });
+  // console.log(getUser?.data);
+
+  // mutation - post method for create user login
+  const { mutateAsync, isPending, isError, error, isSuccess, refetch } =
+    useMutation({
+      mutationFn: updateProfileAPI,
+      mutationKey: ["update-profile"],
+    });
 
   const formik = useFormik({
     initialValues: {
@@ -31,17 +47,22 @@ const UserProfile = () => {
       // console.log(values);
       mutateAsync(values)
         .then((data) => {
-          console.log(data);
+          // console.log(data);
+          refetch();
         })
         .catch((e) => console.log(e));
     },
   });
+  userFetch();
   return (
     <>
       <div className="max-w-4xl mx-auto my-10 p-8 bg-white rounded-lg shadow-md">
-        <h1 className="mb-2 text-2xl text-center font-extrabold">
-          Welcome
-          <span className="text-gray-500 text-sm ml-2">info@gmail.com</span>
+        <h1 className="mb-2 text-xl text-center font-extrabold">
+          Welcome {getUser?.data.username}
+          <br></br>
+          <span className="text-gray-500 text-sm ml-2">
+            {getUser?.data.email}
+          </span>
         </h1>
         <h3 className="text-xl font-semibold text-gray-800 mb-4">
           Update Profile
